@@ -2526,6 +2526,12 @@ function updateBreadcrumb(text){
   document.getElementById("crumb-current").textContent = text;
 }
 </script>
-
+                            <script>
+document.querySelector('.sidebar').addEventListener('click', e => {
+  if (e.target.closest('a') && window.innerWidth <= 900) {
+    document.body.classList.remove('sidebar-open');
+  }
+});
+</script>
 </body>
 </html>
