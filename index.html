@@ -431,23 +431,22 @@ body.sidebar-open .hamburger{
 </head>
 
 <body>
-   <header class="topbar">
+    <header class="topbar">
  <button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">
   <span></span>
   <span></span>
   <span></span>
 </button>
 
-  <a href="#home" class="title">📘 Rebar Docs</a>
+<a href="#home" class="title">📘 Rebar Docs</a>
 
 </header>
     <div class="layout">
-        <!-- SIDEBAR -->
-       <aside class="sidebar">
+        <aside class="sidebar">
         <button class="sidebar-close" onclick="toggleSidebar()">✕</button>
     <nav>
         <a href="#home" class="logo">Getting Started</a>
-
+        
         <hr class="divider">
         
         <span class="nav-title">Mill Setup</span>
@@ -468,6 +467,14 @@ body.sidebar-open .hamburger{
         <a class="nav-item link" href="#gear-ratio">Stand Gear Ratio</a>
         <a class="nav-item link" href="#pinion-center">Pinion Center</a>
         <a class="nav-item link" href="#TMT">TMT System</a>
+    
+        <hr class="divider">
+        <span class="nav-title">Rebar Revamp Phase II</span>
+        <a class="nav-item link" href="#roll-dia-2">Stand & Roll Data</a>
+
+
+
+
     </nav>
 </aside>
 
@@ -486,13 +493,7 @@ body.sidebar-open .hamburger{
   </p>
 
  
-</section>
-
-
-                            <!-- ======================================================
-                            COMMON STANDS (UP TO STAND 10) — APPLICABLE TO ALL SIZES
-                            ====================================================== -->
-          
+</section>         
                
                 <section id="mill-setup-common"class="page">
 
@@ -686,10 +687,6 @@ body.sidebar-open .hamburger{
                         </tbody>
                     </table>
                 </section>
-
-                            <!-- ======================================================
-                            SIZE-SPECIFIC SETUPS (FROM STAND 11 ONWARDS)
-                            ====================================================== -->
 
                 <!-- ================= 10 MM ================= -->
                 <section id="mill-setup-10mm"class="page">
@@ -1067,7 +1064,7 @@ body.sidebar-open .hamburger{
                     <!-- ===== STOCK & ROLL GAP ===== -->
                     <h3>Stock & Roll Gap</h3>
 
-                    <table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%; font-family:Arial, sans-serif; font-size:14px;">
+                    <table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%; font-size:14px;">
                         <thead style="background:#f3f4f6; font-weight:bold; text-align:center;">
                             <tr>
                                 <th>Old Stand No</th>
@@ -1167,7 +1164,7 @@ body.sidebar-open .hamburger{
                     <!-- ===== STOCK & ROLL GAP ===== -->
                     <h3>Stock & Roll Gap</h3>
 
-                    <table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%; font-family:Arial, sans-serif; font-size:14px;">
+                    <table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%;  font-size:14px;">
                         <thead style="background:#f3f4f6; font-weight:bold; text-align:center;">
 
 
@@ -1252,7 +1249,7 @@ body.sidebar-open .hamburger{
                     <!-- ===== STOCK & ROLL GAP ===== -->
                     <h3>Stock & Roll Gap</h3>
 
-                    <table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%; font-family:Arial, sans-serif; font-size:14px;">
+                    <table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%;  font-size:14px;">
                         <thead style="background:#f3f4f6; font-weight:bold; text-align:center;">
 
 
@@ -1350,7 +1347,7 @@ body.sidebar-open .hamburger{
 
 <section id="guides" class="page">
  <h2>Guiding System</h2>
-      <table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%; font-family:Arial, sans-serif; font-size:14px;">
+      <table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%; font-size:14px;">
                         <thead style="background:#f3f4f6; font-weight:bold; text-align:center;">
       <tr>
         <th>Guide Name</th>
@@ -1474,6 +1471,8 @@ body.sidebar-open .hamburger{
         </td>
       </tr>
     </tbody>
+
+
   </table>
      <h2>Troughs and Nozzles</h2>
     <h3>Mill Line</h3>
@@ -1494,10 +1493,6 @@ body.sidebar-open .hamburger{
         <li>Stand 15–16 Trough (16 mm)</li>
         <li>Stand 17–18 Slitting Trough</li>
     </ol>
-
-
-
-    
 
     <h3>Pinch Roll</h3>
     <ol start="16">
@@ -1524,8 +1519,6 @@ body.sidebar-open .hamburger{
 
 
 </section>
-
-
 
 
                 <section id="roll-dia"class="page">
@@ -1823,11 +1816,6 @@ body.sidebar-open .hamburger{
 
                 </section>
 
-           
-
-
-
-
             <section id="gear-ratio"class="page">
                 <h2>Stand Gear Ratio</h2>
                 <table>
@@ -2081,7 +2069,43 @@ body.sidebar-open .hamburger{
 </table>
 </section>
 
+<section id="roll-dia-2"class="page">
+<h2>Stand & Roll Data</h2>
+<table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%; font-size:14px;">
+<thead style="background:#f3f4f6; font-weight:bold; text-align:center;">
+    <tr>
+      <th>Stand</th>
+      <th>Max Roll Diameter (mm)</th>
+    </tr>
+  </thead>
+  <tbody>
+   <tr><td>1H</td><td>670</td></tr>
+    <tr><td>2V</td><td>670</td></tr>
+    <tr><td>3H</td><td>580</td></tr>
+    <tr><td>4V</td><td>580</td></tr>
+    <tr><td>5H</td><td>580</td></tr>
+    <tr><td>6V</td><td>580</td></tr>
+    <tr><td>7H</td><td>480</td></tr>
+    <tr><td>8V</td><td>480</td></tr>
+    <tr><td>9H</td><td>480</td></tr>
+    <tr><td>10V</td><td>480</td></tr>
+    <tr><td>11H</td><td>480</td></tr>
+    <tr><td>12V</td><td>480</td></tr>
+    <tr><td>13H</td><td>350</td></tr>
+    <tr><td>14V</td><td>350</td></tr>
+    <tr><td>15H</td><td>350</td></tr>
+    <tr><td>16H</td><td>350</td></tr>
+    <tr><td>17H</td><td>350</td></tr>
+    <tr><td>18H</td><td>350</td></tr>
+  </tbody>
+</table>
 
+                
+                
+                
+                
+                
+                </section>
 
 
             <footer>
@@ -2149,6 +2173,7 @@ body.sidebar-open .hamburger{
     });
   });
 </script>
+
 <script>
   function loadInitialPage() {
     const hash = location.hash || '#home';
@@ -2164,7 +2189,6 @@ body.sidebar-open .hamburger{
   loadInitialPage();
 </script>
 
-
 <script>
 function toggleSidebar(){
   document.body.classList.toggle("sidebar-open");
@@ -2178,5 +2202,4 @@ function updateBreadcrumb(text){
 </script>
 
 </body>
-
 </html>
