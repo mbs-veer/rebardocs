@@ -5,6 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Rebar Documentation</title>
+     <script>
+    MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
    <style>
 :root{
   /* Base surfaces */
@@ -471,6 +477,10 @@ body.sidebar-open .hamburger{
         <a class="nav-item link" href="#gear-ratio">Stand Gear Ratio</a>
         <a class="nav-item link" href="#pinion-center">Pinion Center</a>
         <a class="nav-item link" href="#TMT">TMT System</a>
+        <hr class="divider">
+        <span class="nav-title">Reheating Furnace</span>
+           <a class="nav-item link" href="#natural-gas">NG Energy Accounting</a>
+        <a class="nav-item link" href="#gas-station">Natural Gas PRS</a>
     
         <hr class="divider">
         <span class="nav-title">Rebar Revamp Phase II</span>
@@ -2043,6 +2053,434 @@ body.sidebar-open .hamburger{
 
             </section>
 
+ <section id="natural-gas"class="page">
+
+
+
+  <h1>Natural Gas Energy Accounting</h1>
+  
+
+  <div class="section">
+    <p>
+      Unlike many commodities, natural gas is not usually traded by volume but by the
+      <strong>energy released during combustion</strong>. For operational control and fuel
+      efficiency monitoring, engineers must convert gas consumption into energy units,
+      typically <strong>MMBTU</strong>.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Calorific Value (CV) of Natural Gas</h2>
+
+    <p>
+      The calorific value defines the amount of energy released when a unit volume of gas
+      is completely combusted.
+    </p>
+
+    <div class="formula">
+      \[
+      \text{CV} = 1026.9 \; \text{BTU/SCF}
+      \]
+    </div>
+
+    <ul>
+      <li><strong>BTU</strong> – British Thermal Unit</li>
+      <li><strong>SCF</strong> – Standard Cubic Foot (at standard conditions)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Gas Consumption in MSCM</h2>
+
+    <p>
+      In plant operation, natural gas flow is generally recorded in
+      <strong>MSCM (Thousand Standard Cubic Meters)</strong>.
+    </p>
+
+    <p>
+      <strong>Example:</strong><br>
+      Gas consumption = <strong>60.878 MSCM</strong>
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Unit Conversion: MSCM → MMSCF</h2>
+
+    <p>
+      For energy calculations, gas volume must be expressed in
+      <strong>MMSCF (Million Standard Cubic Feet)</strong>.
+    </p>
+
+    <div class="formula">
+      \[
+      1 \; \text{MSCM} = 0.0353147 \; \text{MMSCF}
+      \]
+    </div>
+
+    <div class="formula">
+      \[
+      60.878 \times 0.0353147 = 2.15 \; \text{MMSCF}
+      \]
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Energy Calculation</h2>
+
+    <p>
+      The total energy input from natural gas is calculated as:
+    </p>
+
+    <div class="formula">
+      \[
+      \text{Energy (MMBTU)} =
+      \text{Gas Consumption (MMSCF)} \times
+      \text{CV (BTU/SCF)}
+      \]
+    </div>
+
+    <p>Substituting values:</p>
+
+    <div class="formula">
+      \[
+      2.15 \times 1026.9 = 2208 \; \text{MMBTU}
+      \]
+    </div>
+  </div>
+
+  <div class="tip">
+    Always express final gas consumption in <strong>MMBTU</strong> to maintain uniformity
+    in energy accounting and for meaningful furnace performance monitoring.
+  </div>
+
+
+
+
+
+
+</section>
+
+
+
+
+
+              <section id="gas-station"class="page">
+                <h1>Natural Gas Pressure Reducing Station</h1>
+<h2>Line Register</h2>
+                    <table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%;  font-size:14px;">
+                        <thead style="background:#f3f4f6; font-weight:bold; text-align:center;">
+                            <tr>
+
+    <tr>
+      <th>Line_ID</th>
+      <th>Line_Name</th>
+      <th>Line_Type</th>
+      <th>Parent_Line_ID</th>
+      <th>Remarks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ML</td>
+      <td>Main Gas Line</td>
+      <td>MAIN</td>
+      <td>–</td>
+      <td>Primary flow path</td>
+    </tr>
+    <tr>
+      <td>BL-01</td>
+      <td>Bypass Line 01</td>
+      <td>BYPASS</td>
+      <td>ML</td>
+      <td>Bypass ML-003 → ML-017</td>
+    </tr>
+    <tr>
+      <td>BL-02</td>
+      <td>Bypass Line 02</td>
+      <td>BYPASS</td>
+      <td>ML</td>
+      <td>Bypass ML-029 → ML-046</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h2>Branch Connections</h2>
+                    <table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%;  font-size:14px;">
+                        <thead style="background:#f3f4f6; font-weight:bold; text-align:center;">
+                            <tr>
+
+      <th>Branch_ID</th>
+      <th>Parent_Line</th>
+      <th>Start_Node</th>
+      <th>End_Node</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>BL-01</td>
+      <td>ML</td>
+      <td>ML-003</td>
+      <td>ML-017</td>
+      <td>Maintenance bypass</td>
+    </tr>
+    <tr>
+      <td>BL-02</td>
+      <td>ML</td>
+      <td>ML-029</td>
+      <td>ML-046</td>
+      <td>Maintenance bypass</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Node Register</h2>
+<button id="toggleCols" style="margin-bottom:10px; padding:5px 10px; cursor:pointer;">Toggle Columns</button>
+
+<div>
+
+                    <table id="nodeRegister" ;border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%;  font-size:14px;">
+                        <thead style="background:#f3f4f6; font-weight:bold; text-align:center;">
+                            <tr>
+
+      <th>Node_ID</th>
+      <th>Line_ID</th>
+      <th>Seq_No</th>
+      <th>Node_Type</th>
+      <th>Component_Type</th>
+      <th>Size</th>
+      <th>From_Node</th>
+      <th>To_Node</th>
+      <th>Remarks</th>
+    </tr>
+  </thead>
+  <tbody>
+   
+<!-- Main Line ML -->
+    <tr><td>ML-001</td><td>ML</td><td>1</td><td>PIPE</td><td>Pipe Assembly</td><td>6"</td><td>–</td><td>ML-002</td><td>Flange + Pipe</td></tr>
+    <tr><td>ML-002</td><td>ML</td><td>2</td><td>REDUCER</td><td>Reducer</td><td>6"→4"</td><td>ML-001</td><td>ML-003</td><td>–</td></tr>
+    <tr><td>ML-003</td><td>ML</td><td>3</td><td>TEE</td><td>T-Joint</td><td>4"</td><td>ML-002</td><td>ML-004</td><td>Branch to BL-01</td></tr>
+    <tr><td>ML-004</td><td>ML</td><td>4</td><td>PIPE</td><td>Pipe</td><td>4"</td><td>ML-003</td><td>ML-005</td><td>–</td></tr>
+    <tr><td>ML-005</td><td>ML</td><td>5</td><td>ELBOW</td><td>SR Elbow</td><td>4"</td><td>ML-004</td><td>ML-006</td><td>–</td></tr>
+    <tr><td>ML-006</td><td>ML</td><td>6</td><td>PIPE</td><td>Pipe Assembly</td><td>4"</td><td>ML-005</td><td>ML-007</td><td>Pipe + Flange</td></tr>
+    <tr><td>ML-007</td><td>ML</td><td>7</td><td>VALVE</td><td>Ball Valve</td><td>4"</td><td>ML-006</td><td>ML-008</td><td>–</td></tr>
+    <tr><td>ML-008</td><td>ML</td><td>8</td><td>PIPE</td><td>Pipe Assembly</td><td>4"</td><td>ML-007</td><td>ML-009</td><td>Flange + Pipe + Flange<br>With PG</td></tr>
+    <tr><td>ML-009</td><td>ML</td><td>9</td><td>REGULATOR</td><td>Pressure Regulator</td><td>4"</td><td>ML-008</td><td>ML-010</td><td>5 bar → 2 bar </td></tr>
+    <tr><td>ML-010</td><td>ML</td><td>10</td><td>REDUCER</td><td>Reducer</td><td>4"→6"</td><td>ML-009</td><td>ML-011</td><td>–</td></tr>
+    <tr><td>ML-011</td><td>ML</td><td>11</td><td>PIPE</td><td>Pipe Assembly</td><td>6"</td><td>ML-010</td><td>ML-012</td><td>Pipe + Flange<br>With PG</td></tr>
+    <tr><td>ML-012</td><td>ML</td><td>12</td><td>REDUCER</td><td>Reducer</td><td>6"→4"</td><td>ML-011</td><td>ML-013</td><td>Flange + Reducer + Flange</td></tr>
+    <tr><td>ML-013</td><td>ML</td><td>13</td><td>VALVE</td><td>Ball Valve</td><td>4"</td><td>ML-012</td><td>ML-014</td><td>–</td></tr>
+    <tr><td>ML-014</td><td>ML</td><td>14</td><td>PIPE</td><td>Pipe Assembly</td><td>4"</td><td>ML-013</td><td>ML-015</td><td>Flange + Pipe</td></tr>
+    <tr><td>ML-015</td><td>ML</td><td>15</td><td>REDUCER</td><td>Reducer</td><td>4"→6"</td><td>ML-014</td><td>ML-016</td><td>–</td></tr>
+    <tr><td>ML-016</td><td>ML</td><td>16</td><td>ELBOW</td><td>SR Elbow</td><td>6"</td><td>ML-015</td><td>ML-017</td><td>–</td></tr>
+    <tr><td>ML-017</td><td>ML</td><td>17</td><td>TEE</td><td>T-Joint</td><td>6"</td><td>ML-016</td><td>ML-018</td><td>BL-01 rejoins<br>Connected to ML-018 with Flange</td></tr>
+    <tr><td>ML-018</td><td>ML</td><td>18</td><td>PIPE</td><td>Pipe Assembly</td><td>6"</td><td>ML-017</td><td>ML-019</td><td>Flange + Pipe</td></tr>
+    <tr><td>ML-019</td><td>ML</td><td>19</td><td>REDUCER</td><td>Reducer</td><td>6"→4"</td><td>ML-018</td><td>ML-020</td><td>–</td></tr>
+    <tr><td>ML-020</td><td>ML</td><td>20</td><td>PIPE</td><td>Pipe Assembly</td><td>4"</td><td>ML-019</td><td>ML-021</td><td>Pipe + Flange</td></tr>
+    <tr><td>ML-021</td><td>ML</td><td>21</td><td>METER</td><td>Flowmeter</td><td>4"</td><td>ML-020</td><td>ML-022</td><td>–</td></tr>
+    <tr><td>ML-022</td><td>ML</td><td>22</td><td>PIPE</td><td>Pipe Assembly</td><td>4"</td><td>ML-021</td><td>ML-023</td><td>–</td></tr>
+    <tr><td>ML-023</td><td>ML</td><td>23</td><td>REDUCER</td><td>Reducer</td><td>4"→6"</td><td>ML-022</td><td>ML-024</td><td>–</td></tr>
+    <tr><td>ML-024</td><td>ML</td><td>24</td><td>PIPE</td><td>Pipe Assembly</td><td>6"</td><td>ML-023</td><td>ML-025</td><td>Pipe + Flange</td></tr>
+    <tr><td>ML-025</td><td>ML</td><td>25</td><td>ELBOW</td><td>SR Elbow</td><td>6"</td><td>ML-024</td><td>ML-026</td><td>Flange + Elbow</td></tr>
+    <tr><td>ML-026</td><td>ML</td><td>26</td><td>PIPE</td><td>Pipe</td><td>6"</td><td>ML-025</td><td>ML-027</td><td>–</td></tr>
+    <tr><td>ML-027</td><td>ML</td><td>27</td><td>ELBOW</td><td>SR Elbow</td><td>6"</td><td>ML-026</td><td>ML-028</td><td>–</td></tr>
+    <tr><td>ML-028</td><td>ML</td><td>28</td><td>PIPE</td><td>Pipe</td><td>6"</td><td>ML-027</td><td>ML-029</td><td>–</td></tr>
+    <tr><td>ML-029</td><td>ML</td><td>29</td><td>TEE</td><td>T-Joint</td><td>6"</td><td>ML-028</td><td>ML-032</td><td>Branch to BL-02</td></tr>
+    <tr><td>ML-032</td><td>ML</td><td>32</td><td>PIPE</td><td>Pipe Assembly</td><td>6"</td><td>ML-029</td><td>ML-033</td><td>Pipe + Flange</td></tr>
+    <tr><td>ML-033</td><td>ML</td><td>33</td><td>PIPE</td><td>Pipe Assembly</td><td>6"</td><td>ML-032</td><td>ML-034</td><td>Flange + Pipe + Flange<br>With PG</td></tr>
+    <tr><td>ML-034</td><td>ML</td><td>34</td><td>VALVE</td><td>Manual SSV</td><td>6"</td><td>ML-033</td><td>ML-035</td><td>–</td></tr>
+    <tr><td>ML-035</td><td>ML</td><td>35</td><td>FILTER</td><td>Filter</td><td>6"</td><td>ML-034</td><td>ML-036</td><td>–</td></tr>
+    <tr><td>ML-036</td><td>ML</td><td>36</td><td>VALVE</td><td>Auto SSV</td><td>6"</td><td>ML-035</td><td>ML-037</td><td>–</td></tr>
+    <tr><td>ML-037</td><td>ML</td><td>37</td><td>REDUCER</td><td>Reducer Assembly</td><td>6"→4"</td><td>ML-036</td><td>ML-038</td><td>–</td></tr>
+    <tr><td>ML-038</td><td>ML</td><td>38</td><td>REGULATOR</td><td>Pressure Regulator</td><td>4"</td><td>ML-037</td><td>ML-039</td><td>–</td></tr>
+    <tr><td>ML-039</td><td>ML</td><td>39</td><td>REDUCER</td><td>Reducer</td><td>4"→8"</td><td>ML-038</td><td>ML-040</td><td>–</td></tr>
+    <tr><td>ML-040</td><td>ML</td><td>40</td><td>PIPE</td><td>Pipe Assembly</td><td>8"</td><td>ML-039</td><td>ML-041</td><td>With 2 PS</td></tr>
+    <tr><td>ML-041</td><td>ML</td><td>41</td><td>VALVE</td><td>Motorised SV</td><td>8"</td><td>ML-040</td><td>ML-042</td><td>–</td></tr>
+    <tr><td>ML-042</td><td>ML</td><td>42</td><td>PIPE</td><td>Pipe Assembly</td><td>8"</td><td>ML-041</td><td>ML-043</td><td>–</td></tr>
+    <tr><td>ML-043</td><td>ML</td><td>43</td><td>VALVE</td><td>Butterfly Valve</td><td>8"</td><td>ML-042</td><td>ML-044</td><td>–</td></tr>
+    <tr><td>ML-044</td><td>ML</td><td>44</td><td>PIPE</td><td>Pipe Assembly</td><td>8"</td><td>ML-043</td><td>ML-045</td><td>–</td></tr>
+    <tr><td>ML-045</td><td>ML</td><td>45</td><td>PIPE</td><td>Pipe Assembly</td><td>8"</td><td>ML-044</td><td>ML-046</td><td>–</td></tr>
+    <tr><td>ML-046</td><td>ML</td><td>46</td><td>TEE</td><td>T-Joint</td><td>8"</td><td>ML-045</td><td>–</td><td>BL-02 rejoins</td></tr>
+  
+ 
+ <tr style="background-color:#f5f7fa; height:20px;">
+      <td colspan="9"></td>
+    </tr>
+ 
+    <!-- Bypass BL-01 (mirrored ML-003 → ML-017) -->
+    <tr><td>BL-01-003</td><td>BL-01</td><td>1</td><td>TEE</td><td>T-Joint</td><td>4"</td><td>–</td><td>BL-01-004</td><td>Start of bypass from ML-003</td></tr>
+    <tr><td>BL-01-004</td><td>BL-01</td><td>2</td><td>PIPE</td><td>Pipe Assembly</td><td>4"</td><td>BL-01-003</td><td>BL-01-005</td><td>Mirrored ML-004</td></tr>
+    <tr><td>BL-01-005</td><td>BL-01</td><td>3</td><td>ELBOW</td><td>SR Elbow</td><td>4"</td><td>BL-01-004</td><td>BL-01-006</td><td>Mirrored ML-005</td></tr>
+    <tr><td>BL-01-006</td><td>BL-01</td><td>4</td><td>PIPE</td><td>Pipe Assembly</td><td>4"</td><td>BL-01-005</td><td>BL-01-007</td><td>Mirrored ML-006</td></tr>
+    <tr><td>BL-01-007</td><td>BL-01</td><td>5</td><td>VALVE</td><td>Ball Valve</td><td>4"</td><td>BL-01-006</td><td>BL-01-008</td><td>Mirrored ML-007</td></tr>
+    <tr><td>BL-01-008</td><td>BL-01</td><td>6</td><td>PIPE</td><td>Pipe Assembly</td><td>4"</td><td>BL-01-007</td><td>BL-01-009</td><td>Mirrored ML-008</td></tr>
+    <tr><td>BL-01-009</td><td>BL-01</td><td>7</td><td>REGULATOR</td><td>Pressure Regulator</td><td>4"</td><td>BL-01-008</td><td>BL-01-010</td><td>Mirrored ML-009</td></tr>
+    <tr><td>BL-01-010</td><td>BL-01</td><td>8</td><td>REDUCER</td><td>Reducer</td><td>4"→6"</td><td>BL-01-009</td><td>BL-01-011</td><td>Mirrored ML-010</td></tr>
+    <tr><td>BL-01-011</td><td>BL-01</td><td>9</td><td>PIPE</td><td>Pipe Assembly</td><td>6"</td><td>BL-01-010</td><td>BL-01-012</td><td>Mirrored ML-011</td></tr>
+    <tr><td>BL-01-012</td><td>BL-01</td><td>10</td><td>REDUCER</td><td>Reducer</td><td>6"→4"</td><td>BL-01-011</td><td>BL-01-013</td><td>Mirrored ML-012</td></tr>
+    <tr><td>BL-01-013</td><td>BL-01</td><td>11</td><td>VALVE</td><td>Ball Valve</td><td>4"</td><td>BL-01-012</td><td>BL-01-014</td><td>Mirrored ML-013</td></tr>
+    <tr><td>BL-01-014</td><td>BL-01</td><td>12</td><td>PIPE</td><td>Pipe Assembly</td><td>4"</td><td>BL-01-013</td><td>BL-01-015</td><td>Mirrored ML-014</td></tr>
+    <tr><td>BL-01-015</td><td>BL-01</td><td>13</td><td>REDUCER</td><td>Reducer</td><td>4"→6"</td><td>BL-01-014</td><td>BL-01-016</td><td>Mirrored ML-015</td></tr>
+    <tr><td>BL-01-016</td><td>BL-01</td><td>14</td><td>ELBOW</td><td>SR Elbow</td><td>6"</td><td>BL-01-015</td><td>BL-01-017</td><td>Mirrored ML-016</td></tr>
+    <tr><td>BL-01-017</td><td>BL-01</td><td>15</td><td>TEE</td><td>T-Joint</td><td>6"</td><td>BL-01-016</td><td>–</td><td>Rejoins ML-017</td></tr>
+ <tr style="background-color:#f5f7fa; height:20px;">
+      <td colspan="9"></td>
+    </tr>
+    <!-- Bypass BL-02 (mirrored ML-029 → ML-046) -->
+    <tr><td>BL-02-029</td><td>BL-02</td><td>1</td><td>TEE</td><td>T-Joint</td><td>6"</td><td>–</td><td>BL-02-032</td><td>Start of bypass from ML-029</td></tr>
+    <tr><td>BL-02-032</td><td>BL-02</td><td>2</td><td>PIPE</td><td>Pipe Assembly</td><td>6"</td><td>BL-02-029</td><td>BL-02-033</td><td>Mirrored ML-032</td></tr>
+    <tr><td>BL-02-033</td><td>BL-02</td><td>3</td><td>PIPE</td><td>Pipe Assembly</td><td>6"</td><td>BL-02-032</td><td>BL-02-034</td><td>Mirrored ML-033</td></tr>
+    <tr><td>BL-02-034</td><td>BL-02</td><td>4</td><td>VALVE</td><td>Manual SSV</td><td>6"</td><td>BL-02-033</td><td>BL-02-035</td><td>Mirrored ML-034</td></tr>
+    <tr><td>BL-02-035</td><td>BL-02</td><td>5</td><td>FILTER</td><td>Filter</td><td>6"</td><td>BL-02-034</td><td>BL-02-036</td><td>Mirrored ML-035</td></tr>
+    <tr><td>BL-02-036</td><td>BL-02</td><td>6</td><td>VALVE</td><td>Auto SSV</td><td>6"</td><td>BL-02-035</td><td>BL-02-037</td><td>Mirrored ML-036</td></tr>
+    <tr><td>BL-02-037</td><td>BL-02</td><td>7</td><td>REDUCER</td><td>Reducer Assembly</td><td>6"→4"</td><td>BL-02-036</td><td>BL-02-038</td><td>Mirrored ML-037</td></tr>
+    <tr><td>BL-02-038</td><td>BL-02</td><td>8</td><td>REGULATOR</td><td>Pressure Regulator</td><td>4"</td><td>BL-02-037</td><td>BL-02-039</td><td>Mirrored ML-038</td></tr>
+    <tr><td>BL-02-039</td><td>BL-02</td><td>9</td><td>REDUCER</td><td>Reducer</td><td>4"→8"</td><td>BL-02-038</td><td>BL-02-040</td><td>Mirrored ML-039</td></tr>
+    <tr><td>BL-02-040</td><td>BL-02</td><td>10</td><td>PIPE</td><td>Pipe Assembly</td><td>8"</td><td>BL-02-039</td><td>BL-02-041</td><td>Mirrored ML-040</td></tr>
+    <tr><td>BL-02-041</td><td>BL-02</td><td>11</td><td>VALVE</td><td>Motorised SV</td><td>8"</td><td>BL-02-040</td><td>BL-02-042</td><td>Mirrored ML-041</td></tr>
+    <tr><td>BL-02-042</td><td>BL-02</td><td>12</td><td>PIPE</td><td>Pipe Assembly</td><td>8"</td><td>BL-02-041</td><td>BL-02-043</td><td>Mirrored ML-042</td></tr>
+    <tr><td>BL-02-043</td><td>BL-02</td><td>13</td><td>VALVE</td><td>Butterfly Valve</td><td>8"</td><td>BL-02-042</td><td>BL-02-044</td><td>Mirrored ML-043</td></tr>
+    <tr><td>BL-02-044</td><td>BL-02</td><td>14</td><td>PIPE</td><td>Pipe Assembly</td><td>8"</td><td>BL-02-043</td><td>BL-02-045</td><td>Mirrored ML-044</td></tr>
+    <tr><td>BL-02-045</td><td>BL-02</td><td>15</td><td>PIPE</td><td>Pipe Assembly</td><td>8"</td><td>BL-02-044</td><td>BL-02-046</td><td>Mirrored ML-045</td></tr>
+    <tr><td>BL-02-046</td><td>BL-02</td><td>16</td><td>TEE</td><td>T-Joint</td><td>8"</td><td>BL-02-045</td><td>–</td><td>Rejoins ML-046</td></tr>
+  </tbody>
+</table>
+<script>
+const btn = document.getElementById('toggleCols');
+const table = document.getElementById('nodeRegister');
+let hidden = false;
+
+btn.addEventListener('click', () => {
+  hidden = !hidden;
+  const cols = [1, 2, 6, 7]; // Line_ID, Seq_No, From_Node, To_Node
+
+  for (let row of table.rows) {
+    cols.forEach(idx => {
+      const cell = row.cells[idx];
+      if (!cell) return;
+
+      // Apply transition
+      cell.style.transition = 'opacity 0.1s';
+
+      if (hidden) {
+        cell.style.opacity = '0';
+        setTimeout(() => cell.style.display = 'none', 100);
+      } else {
+        cell.style.display = ''; // reset display
+        setTimeout(() => cell.style.opacity = '1', 10);
+      }
+    });
+  }
+});
+</script>
+
+
+</div>
+<h2>Geometry Data</h2>
+                    <table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%;  font-size:14px;">
+                        <thead style="background:#f3f4f6; font-weight:bold; text-align:center;">
+                            <tr>
+      <th>Node_ID</th>
+      <th>Geometry_Type</th>
+      <th>Straight_mm</th>
+      <th>Run_mm</th>
+      <th>Branch_mm</th>
+      <th>Radius_Type</th>
+      <th>Angle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Main Line ML -->
+    <tr><td>ML-001</td><td>PIPE</td><td>1500</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-002</td><td>REDUCER</td><td>130</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-003</td><td>TEE</td><td>–</td><td>200</td><td>100</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-006</td><td>PIPE</td><td>290</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-007</td><td>VALVE</td><td>230</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-008</td><td>PIPE</td><td>300</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-009</td><td>REGULATOR</td><td>540</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-010</td><td>REDUCER</td><td>160</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-011</td><td>PIPE</td><td>830</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-012</td><td>REDUCER</td><td>150</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-013</td><td>VALVE</td><td>230</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-014</td><td>PIPE</td><td>150</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-015</td><td>REDUCER</td><td>140</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-016</td><td>ELBOW</td><td>–</td><td>–</td><td>–</td><td>SR</td><td>90</td></tr>
+    <tr><td>ML-017</td><td>TEE</td><td>–</td><td>285</td><td>125</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-018</td><td>PIPE</td><td>340</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-019</td><td>REDUCER</td><td>150</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-020</td><td>PIPE</td><td>1030</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-021</td><td>METER</td><td>260</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-022</td><td>PIPE</td><td>540</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-023</td><td>REDUCER</td><td>150</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-024</td><td>PIPE</td><td>340</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-025</td><td>ELBOW</td><td>–</td><td>–</td><td>–</td><td>SR</td><td>90</td></tr>
+    <tr><td>ML-026</td><td>PIPE</td><td>970</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-027</td><td>ELBOW</td><td>–</td><td>–</td><td>–</td><td>SR</td><td>90</td></tr>
+    <tr><td>ML-028</td><td>PIPE</td><td>490</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-029</td><td>TEE</td><td>–</td><td>280</td><td>140</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-032</td><td>PIPE</td><td>360</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-033</td><td>PIPE</td><td>240</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-034</td><td>VALVE</td><td>480</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-035</td><td>FILTER</td><td>480</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-036</td><td>VALVE</td><td>480</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-037</td><td>REDUCER</td><td>300</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-038</td><td>REGULATOR</td><td>320</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-039</td><td>REDUCER</td><td>160</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-040</td><td>PIPE</td><td>830</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-041</td><td>VALVE</td><td>600</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-042</td><td>PIPE</td><td>290</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-043</td><td>VALVE</td><td>65</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-044</td><td>PIPE</td><td>290</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-045</td><td>PIPE</td><td>310</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>ML-046</td><td>TEE</td><td>–</td><td>180</td><td>–</td><td>–</td><td>–</td></tr>
+
+    <!-- Empty colored row -->
+    <tr style="background-color:#f5f7fa; height:20px;"><td colspan="7"></td></tr>
+
+    <!-- Bypass BL-01 (mirrored ML-003 → ML-017) -->
+    <tr><td>BL-01-003</td><td>TEE</td><td>–</td><td>200</td><td>100</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-01-004</td><td>PIPE</td><td>290</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-01-005</td><td>ELBOW</td><td>–</td><td>–</td><td>–</td><td>SR</td><td>90</td></tr>
+    <tr><td>BL-01-006</td><td>PIPE</td><td>290</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-01-007</td><td>VALVE</td><td>230</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-01-008</td><td>PIPE</td><td>300</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-01-009</td><td>REGULATOR</td><td>540</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-01-010</td><td>REDUCER</td><td>160</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-01-011</td><td>PIPE</td><td>830</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-01-012</td><td>REDUCER</td><td>150</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-01-013</td><td>VALVE</td><td>230</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-01-014</td><td>PIPE</td><td>150</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-01-015</td><td>REDUCER</td><td>140</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-01-016</td><td>ELBOW</td><td>–</td><td>–</td><td>–</td><td>SR</td><td>90</td></tr>
+    <tr><td>BL-01-017</td><td>TEE</td><td>–</td><td>285</td><td>125</td><td>–</td><td>–</td></tr>
+
+    <!-- Empty colored row -->
+    <tr style="background-color:#f5f7fa; height:20px;"><td colspan="7"></td></tr>
+
+    <!-- Bypass BL-02 (mirrored ML-029 → ML-046) -->
+    <tr><td>BL-02-029</td><td>TEE</td><td>–</td><td>280</td><td>140</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-02-032</td><td>PIPE</td><td>360</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-02-033</td><td>PIPE</td><td>240</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-02-034</td><td>VALVE</td><td>480</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-02-035</td><td>FILTER</td><td>480</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-02-036</td><td>VALVE</td><td>480</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-02-037</td><td>REDUCER</td><td>300</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-02-038</td><td>REGULATOR</td><td>320</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-02-039</td><td>REDUCER</td><td>160</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-02-040</td><td>PIPE</td><td>830</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-02-041</td><td>VALVE</td><td>600</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-02-042</td><td>PIPE</td><td>290</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-02-043</td><td>VALVE</td><td>65</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-02-044</td><td>PIPE</td><td>290</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-02-045</td><td>PIPE</td><td>310</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td>BL-02-046</td><td>TEE</td><td>–</td><td>180</td><td>–</td><td>–</td><td>–</td></tr>
+  </tbody>
+</table>
+
+
+</section>
+
      <section id="pinion-center"class="page">
                 
                     <h2>Pinion Center</h2>
@@ -2840,5 +3278,6 @@ document.querySelector('.sidebar').addEventListener('click', e => {
   }
 });
 </script>
+
 </body>
 </html>
